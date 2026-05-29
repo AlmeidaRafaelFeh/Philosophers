@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 06:27:31 by rafreire          #+#    #+#             */
-/*   Updated: 2026/05/29 14:32:23 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:06:10 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct  s_data
     int             someone_died;
     pthread_mutex_t *forks;
     pthread_mutex_t output_lock;
+    pthread_mutex_t monitor_lock;
     t_action        *action;
 }   t_data;
 

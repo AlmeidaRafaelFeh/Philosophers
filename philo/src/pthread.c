@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 06:28:58 by rafreire          #+#    #+#             */
-/*   Updated: 2026/05/29 14:51:05 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/05/29 19:09:55 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void    starting_mutex(t_data *data)
     int	i;
 
 	i = 0;
+    pthread_mutex_init(&data->monitor_lock, NULL);
 	while (i < data->num_philos)
 	{
 		pthread_mutex_init(&data->forks[i], NULL);
@@ -88,6 +89,7 @@ static void    destruction_mutex(t_data *data)
         i++;
     }
     pthread_mutex_destroy(&data->output_lock);
+    pthread_mutex_destroy(&data->monitor_lock);
 }
 
 static void	cleanup_threads(t_data *data, int created_count)

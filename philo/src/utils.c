@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:00:18 by rafreire          #+#    #+#             */
-/*   Updated: 2026/05/29 14:11:44 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/05/29 18:51:44 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	ft_atoi_verified(const char *str)
 
 void	print_action(t_data *data, int id, char *action)
 {
+	if (data->someone_died && action[0] != 'd')
+	{
+		pthread_mutex_unlock(&data->output_lock);
+		return ;
+	}
 	pthread_mutex_lock(&data->output_lock);
 	printf("%ld %d %s\n", get_timestamp(data), id, action);
 	pthread_mutex_unlock(&data->output_lock);
