@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:00:18 by rafreire          #+#    #+#             */
-/*   Updated: 2026/05/29 18:51:44 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/02 11:48:10 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_atoi_verified(const char *str)
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (result > INT_MAX / 10 || (result == INT_MAX / 10 && (str[i] - '0') > INT_MAX % 10))
+		if (result > INT_MAX / 10 || (result == INT_MAX / 10
+				&& (str[i] - '0') > INT_MAX % 10))
 			return (0);
 		result = result * 10 + (str[i] - '0');
 		i++;
@@ -47,14 +48,14 @@ long	get_timestamp(t_data *data)
 {
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
-	return((tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time);
+	gettimeofday (&tv, NULL);
+	return ((tv.tv_sec * 1000 + tv.tv_usec / 1000) - data->start_time);
 }
 
-int all_ate_enough(t_data *data)
+int	all_ate_enough(t_data *data)
 {
-	int i;
-    
+	int	i;
+
 	if (data->num_times_eat <= 0)
 		return (0);
 	i = 0;
