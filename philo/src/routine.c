@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:40:14 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/02 11:45:28 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/02 16:04:00 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*philosopher_routine(void *arg)
 		usleep(3000);
 	while (!data->someone_died)
 	{
-		if (data->num_philos == 3 && action->id == 1)
+		if (data->num_philos % 2 != 0 && action->id == 1)
 			usleep(60000);
 		take_forks(data, action);
 		eat_action(data, action);
