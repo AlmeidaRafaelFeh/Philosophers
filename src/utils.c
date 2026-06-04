@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:00:18 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/02 11:48:10 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:25:37 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ int	ft_atoi_verified(const char *str)
 
 void	print_action(t_data *data, int id, char *action)
 {
-	if (data->someone_died && action[0] != 'd')
-	{
-		pthread_mutex_unlock(&data->output_lock);
+	if (is_someone_died(data) && action[0] != 'd')
 		return ;
-	}
 	pthread_mutex_lock(&data->output_lock);
 	printf("%ld %d %s\n", get_timestamp(data), id, action);
 	pthread_mutex_unlock(&data->output_lock);
@@ -66,4 +63,12 @@ int	all_ate_enough(t_data *data)
 		i++;
 	}
 	return (1);
+}
+
+void	single_philosopher(t_data *data, t_action *action)
+{
+	pthread_mutex_lock(action->left_fork);
+	print_action(data, action->id, "has taken a fork");
+	usleep(data->time_to_die * 1000);
+	pthread_mutex_unlock(action->left_fork);
 }

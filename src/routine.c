@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:40:14 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/02 16:30:09 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:20:28 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	*philosopher_routine(void *arg)
 		usleep(6000);
 	else
 		usleep(3000);
-	while (!data->someone_died)
+	if (data->num_philos == 1)
+		return (single_philosopher(data, action), NULL);
+	while (!is_someone_died(data))
 	{
 		if (data->num_philos % 2 != 0 && action->id == 1)
 			usleep(60000);
@@ -72,7 +74,7 @@ static void	eat_action(t_data *data, t_action *action)
 	print_action(data, action->id, "is eating");
 	usleep(data->time_to_eat * 1000);
 	if (data->num_times_eat > 0 && all_ate_enough(data))
-		data->someone_died = 1;
+		set_someone_died(data);
 }
 
 static void	free_forks(t_action *action)

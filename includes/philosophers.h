@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 06:27:31 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/02 11:36:54 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/04 17:23:27 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ typedef struct s_data
 void	starting_tools(t_data *data);
 void	*philosopher_routine(void *arg);
 void	print_action(t_data *data, int id, char *action);
+void	set_someone_died(t_data *data);
 void	args_handling(char **av, t_data *data);
 void	*track_life_philo(void *arg);
+void	single_philosopher(t_data *data, t_action *action);
 long	get_timestamp(t_data *data);
 int		create_threads(t_data *data);
+int		is_someone_died(t_data *data);
 int		starting_data(int ac, char **av, t_data *data);
 int		ft_atoi_verified(const char *str);
 int		is_valid_nums(char *str);
