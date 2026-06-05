@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:40:14 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/04 17:20:28 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/05 17:59:10 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*philosopher_routine(void *arg)
 		take_forks(data, action);
 		eat_action(data, action);
 		free_forks(action);
-		if (data->num_times_eat > 0 && action->times_eaten
+		if (action->times_eaten > 0 && action->times_eaten
 			>= data->num_times_eat)
 			break ;
 		sleep_action(data, action);

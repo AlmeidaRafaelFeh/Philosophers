@@ -6,7 +6,7 @@
 /*   By: rafreire <rafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 07:00:18 by rafreire          #+#    #+#             */
-/*   Updated: 2026/06/04 17:25:37 by rafreire         ###   ########.fr       */
+/*   Updated: 2026/06/05 17:54:37 by rafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,24 @@ long	get_timestamp(t_data *data)
 int	all_ate_enough(t_data *data)
 {
 	int	i;
+	int	eaten;
 
 	if (data->num_times_eat <= 0)
 		return (0);
+	pthread_mutex_lock(&data->monitor_lock);
 	i = 0;
+	eaten = 0;
 	while (i < data->num_philos)
 	{
-		if (data->action[i].times_eaten < data->num_times_eat)
+		eaten = data->action[i].times_eaten;
+		if (eaten < data->num_times_eat)
+		{
+			pthread_mutex_unlock(&data->monitor_lock);
 			return (0);
+		}
 		i++;
 	}
+	pthread_mutex_unlock(&data->monitor_lock);
 	return (1);
 }
 
